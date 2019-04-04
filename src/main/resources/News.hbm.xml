@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.xt.hibernate.bean.News" table="news" schema="test" dynamic-update="true">
+        <id name="id" column="id">
+            <generator class="native"></generator>
+        </id>
+        <property name="title" column="title"/>
+        <property name="author" column="author"/>
+        <property name="date" column="date"/>
+        <!-- 映射派生属性 -->
+        <property name="desc" formula="(select concat(author, ': ', title) from news where id = id)"></property>
+        <!-- 映射大对象 -->
+        <property name="content">
+            <column name="content" sql-type="mediumtext"></column>
+        </property>
+        <!-- 映射二进制-->
+        <property name="image">
+            <column name="image" sql-type="mediumblob"></column>
+        </property>
+    </class>
+</hibernate-mapping>
